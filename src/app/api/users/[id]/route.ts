@@ -23,3 +23,26 @@ export async function GET(
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+
+// UPDATE user by id
+export async function PATCH(
+  req: Request,
+  { params }: { params: { id: string } },
+) {
+  try {
+    const { name, email } = await req.json();
+
+    const updatedUser = await db
+      .update(users)
+      .set({ name, email })
+      .where(eq(users.id, params.id));
+
+    if (!updatedUser)
+      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+
+    return NextResponse.json({ message: 'User updated', user: updatedUser });
+  } catch (error: any) {
+    console.error('Error updating user:', error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
