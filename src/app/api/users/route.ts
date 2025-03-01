@@ -1,4 +1,5 @@
-// filepath: src/app/api/users/route.ts
+import { db } from '@/db';
+import { users } from '@/db/schema';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
