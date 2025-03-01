@@ -46,3 +46,17 @@ export async function PATCH(
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+
+// DELETE a user by id
+export async function DELETE(
+  req: Request,
+  { params }: { params: { id: string } },
+) {
+  try {
+    await db.delete(users).where(eq(users.id, params.id));
+    return NextResponse.json({ message: 'User deleted!' });
+  } catch (error: any) {
+    console.error('Error deleting user:', error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
