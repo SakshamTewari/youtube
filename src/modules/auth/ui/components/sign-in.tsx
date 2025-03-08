@@ -1,6 +1,10 @@
 import { Button } from '@/components/ui/button';
 
-export const Signin = () => {
+interface SigninProps {
+  onClose: () => void;
+}
+
+export const Signin = ({ onClose }: SigninProps) => {
   return (
     <div className='h-screen flex justify-center flex-col'>
       <div className='flex justify-center'>
@@ -22,7 +26,9 @@ export const Signin = () => {
               placeholder='123456'
             />
             <div className='flex justify-center pt-5'>
-              <Button variant={'outline'}>Signin</Button>
+              <Button variant={'outline'} className='w-full' onClick={onClose}>
+                Signin
+              </Button>
             </div>
           </div>
         </a>
